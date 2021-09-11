@@ -16,6 +16,9 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'sprockets', '~> 3.5', '>= 3.5.2'
 gem 'rails-controller-testing'
 gem 'bcrypt'
+gem 'faker', '~> 1.6', '>= 1.6.3'
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+gem 'bootstrap-will_paginate', '~> 1.0'
 group :development, :test do
   gem 'sqlite3', '1.4.2'
   gem 'byebug',  '11.1.3', platforms: [:mri, :mingw, :x64_mingw]
