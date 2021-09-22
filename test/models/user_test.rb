@@ -66,4 +66,34 @@ class UserTest < ActiveSupport::TestCase
            @user.destroy
     end
 end
+
+test "relationship" do
+   @user= users(:michael)
+   @other_user=users(:archer)
+   @user.follow(@other_user)
+   assert @user.following?(@other_user)
+   assert @other_user.followers.include?(@user)
+   @user.unfollow(@other_user)
+   assert_not @user.following?(@other_user)
+end
+
+test "feed" do
+  @user = users(:michael)
+  @followed_user= users(:lana)
+  @unfollow_user=users(:archer)
+
+  @user.microposts.each do |post|
+       assert @user.feed.include?(post)
+  end
+
+  @followed_user.microposts.each do |followed_post|
+    assert @user.feed.include?(followed_post)
+  end
+
+  @unfollow_user.microposts.each do |unfollow_post|
+      assert_not @user.feed.include?(unfollow_post)
+  end
+
+
+end
 end
