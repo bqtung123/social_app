@@ -15,6 +15,26 @@ class User < ApplicationRecord
                                                             uniqueness: true
     has_secure_password
     validates :password, presence: true, length: {minimum: 6}, allow_nil: true
+
+
+    def self.from_omniauth(auth)
+        result = User.where(email: auth.info.email).first
+        if result
+          return result
+        else
+          where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+            
+            user.email = auth.info.email 
+            user.name = auth.info.name
+            user.provider = auth.provider
+            user.uid = auth.uid
+            user.oauth_token = auth.credentials.token
+            user.password=user.password_confirmation=User.new_token
+            user.activated = 1
+            user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+          end
+        end
+      end
     
     def downcase
         self.email = email.downcase

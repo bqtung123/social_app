@@ -20,6 +20,12 @@ class SessionsController < ApplicationController
         end
     end
 
+    def redirect_callback
+        @user = User.from_omniauth(request.env['omniauth.auth'])
+        login @user
+        redirect_to @user
+    end
+
     def destroy
        logout if logged_in?
        redirect_to root_path
