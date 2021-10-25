@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+   has_many :providers,dependent: :destroy
     has_many :microposts, dependent: :destroy
     has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", 
                                     dependent: :destroy
@@ -16,23 +17,27 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
-
+    # edit in there
     def self.from_omniauth(auth)
-        result = User.where(email: auth.info.email).first
-        if result
-          return result
+        user = User.where(email: auth.info.email).first
+        if user
+          if  provider = user.providers.find_by(provider: auth.provider)
+              provider.update(oauth_token: auth.credentials.token,oauth_expires_at: Time.at(auth.credentials.expires_at))
+          else
+              user.providers.create(provider: auth.provider,oauth_token: auth.credentials.token,oauth_expires_at: Time.at(auth.credentials.expires_at))
+          end
+          return user
         else
-          where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-            
+          user = where(email: auth.info.email).first_or_create do |user|
             user.email = auth.info.email 
             user.name = auth.info.name
-            user.provider = auth.provider
-            user.uid = auth.uid
-            user.oauth_token = auth.credentials.token
             user.password=user.password_confirmation=User.new_token
             user.activated = 1
-            user.oauth_expires_at = Time.at(auth.credentials.expires_at)
           end
+
+          user.providers.create(provider: auth.provider,oauth_token: auth.credentials.token,oauth_expires_at: Time.at(auth.credentials.expires_at))
+
+          return user
         end
       end
     
