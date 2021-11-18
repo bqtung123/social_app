@@ -1,10 +1,10 @@
 class User < ApplicationRecord
   has_many :providers, dependent: :destroy
   has_many :microposts, dependent: :destroy
-  has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
 
-  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -17,14 +17,15 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # edit in there
-  def self.from_omniauth(auth)
+  def self.from_omniauth auth
     user = User.where(email: auth.info.email).first
     expires_at = auth.credentials.expires_at
+    token = auth.credentials.token
     if user
       if (provider = user.providers.find_by(provider: auth.provider))
         provider.update(oauth_token: auth.credentials.token, oauth_expires_at: Time.at(expires_at))
       else
-        user.providers.create(provider: auth.provider, oauth_token: auth.credentials.token, oauth_expires_at: Time.at(expires_at))
+        user.providers.create(provider: auth.provider, oauth_token: token, oauth_expires_at: Time.at(expires_at))
       end
     else
       user = where(email: auth.info.email).first_or_create do |u|
@@ -34,7 +35,7 @@ class User < ApplicationRecord
         u.activated = 1
       end
 
-      user.providers.create(provider: auth.provider, oauth_token: auth.credentials.token, oauth_expires_at: Time.at(expires_at))
+      user.providers.create(provider: auth.provider, oauth_token: token, oauth_expires_at: Time.at(expires_at))
     end
     user
   end
@@ -43,7 +44,7 @@ class User < ApplicationRecord
     self.email = email.downcase
   end
 
-  def self.digest(string)
+  def self.digest string
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
@@ -76,7 +77,7 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  def authenticated?(attribute, token)
+  def authenticated? attribute, token
     digest = send("#{attribute}_digest")
     return false if digest.nil?
 
@@ -88,19 +89,19 @@ class User < ApplicationRecord
   end
 
   def feed
-    following_ids = 'SELECT followed_id FROM relationships WHERE follower_id = :user_id'
+    following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids}) OR user_id  = :user_id", user_id: id)
   end
 
-  def follow(other_user)
+  def follow other_user
     active_relationships.create(followed_id: other_user.id)
   end
 
-  def unfollow(other_user)
+  def unfollow other_user
     active_relationships.find_by(followed_id: other_user.id).destroy
   end
 
-  def following?(other_user)
+  def following? other_user
     following.include?(other_user)
   end
 end

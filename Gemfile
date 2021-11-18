@@ -28,7 +28,8 @@ gem 'omniauth-google-oauth2','0.8.2'
 gem 'omniauth', '~> 1.6', '>= 1.6.1'
 gem "omniauth-facebook"
 gem 'rubocop'
-
+gem 'rubocop-performance'
+gem 'rubocop-rails'
 group :development, :test do
   gem 'sqlite3', '1.4.2'
   gem 'byebug',  '11.1.3', platforms: [:mri, :mingw, :x64_mingw]
