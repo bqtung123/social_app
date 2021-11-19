@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.4'
+ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
@@ -22,6 +22,14 @@ gem 'bootstrap-will_paginate', '~> 1.0'
 gem 'carrierwave',             '0.10.0'
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 gem 'fog',                     '1.36.0'
+
+gem "figaro"
+gem 'omniauth-google-oauth2','0.8.2'
+gem 'omniauth', '~> 1.6', '>= 1.6.1'
+gem "omniauth-facebook"
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rails'
 group :development, :test do
   gem 'sqlite3', '1.4.2'
   gem 'byebug',  '11.1.3', platforms: [:mri, :mingw, :x64_mingw]

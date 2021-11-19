@@ -17,6 +17,10 @@
         <span>Remember me on this computer</span>
       <% end %>
 
+
+      <li><%= link_to 'Sign In with Google', '/auth/google_oauth2' %></li>
+      <li><%= link_to 'Sign In with facebook', '/auth/facebook' %></li>
+      
       <%= f.submit "Log in", class: "btn btn-primary" %>
     <% end %>
 
