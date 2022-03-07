@@ -30,6 +30,10 @@ gem "omniauth-facebook"
 gem 'rubocop'
 gem 'rubocop-performance'
 gem 'rubocop-rails'
+
+gem 'cancancan'
+gem 'rolify'
+gem 'devise'
 group :development, :test do
   gem 'sqlite3', '1.4.2'
   gem 'byebug',  '11.1.3', platforms: [:mri, :mingw, :x64_mingw]
