@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  rolify
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
+         
   has_many :providers, dependent: :destroy
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -6,16 +10,22 @@ class User < ApplicationRecord
 
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships
-  attr_accessor :remember_token, :activation_token, :reset_token
+  # attr_accessor :remember_token, :activation_token, :reset_token
 
-  before_save :downcase
-  before_create :create_activation_digest
+  # before_save :downcase
+  # before_create :create_activation_digest
+  after_create :assign_default_role
+
   validates :name, presence: true, length: { maximum: 50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
-  has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  # validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
+  # has_secure_password
+  # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+
+  def assign_default_role
+    self.add_role(:user) if self.roles.blank?
+  end
   # edit in there
   def self.from_omniauth auth
     user = User.where(email: auth.info.email).first
