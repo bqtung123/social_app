@@ -34,7 +34,10 @@ gem 'rubocop-rails'
 gem 'cancancan'
 gem 'rolify'
 gem 'devise'
+<<<<<<< HEAD
 gem 'jquery-rails'
+=======
+>>>>>>> 41602a7cd4068ed69062d306ad31e879bec6c5a5
 group :development, :test do
   gem 'sqlite3', '1.4.2'
   gem 'byebug',  '11.1.3', platforms: [:mri, :mingw, :x64_mingw]
