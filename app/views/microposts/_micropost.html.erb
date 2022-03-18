@@ -1,3 +1,4 @@
+
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
@@ -9,6 +10,17 @@
     <% if current_user?(micropost.user) %>
     <%= link_to "delete", micropost, method: :delete,
                                      data: { confirm: "You sure?" } %>
-  <% end %>
+    <% end %>
   </span>
 </li>
+
+
+<%= turbo_stream_from micropost, :comments %>
+<%= tag.div id: "#{dom_id(micropost.user,micropost.id)}_comments" do %>
+  <%= render micropost.comments%>
+<% end %>
+
+
+
+  <%= turbo_frame_tag "new_comment", src: new_micropost_comment_path(micropost),target: "_top" %>
+

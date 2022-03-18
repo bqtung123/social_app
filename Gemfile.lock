@@ -103,6 +103,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dry-inflector (0.2.1)
@@ -361,6 +362,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.6.0)
     regexp_parser (2.1.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -378,6 +380,23 @@ GEM
       netrc (~> 0.8)
     rexml (3.2.5)
     rolify (6.0.0)
+    rspec-core (3.9.3)
+      rspec-support (~> 3.9.3)
+    rspec-expectations (3.9.4)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-rails (3.9.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
+      rspec-support (~> 3.9.0)
+    rspec-support (3.9.4)
     rubocop (1.22.3)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -426,9 +445,9 @@ GEM
     sqlite3 (1.4.2)
     thor (1.1.0)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (1.0.1)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2021.1)
@@ -497,7 +516,9 @@ DEPENDENCIES
   rack-mini-profiler (= 2.3.1)
   rails (~> 6.1.4)
   rails-controller-testing
+  redis (~> 4.0)
   rolify
+  rspec-rails (~> 3.0)
   rubocop
   rubocop-performance
   rubocop-rails
@@ -506,7 +527,7 @@ DEPENDENCIES
   spring (= 2.1.1)
   sprockets (~> 3.5, >= 3.5.2)
   sqlite3 (= 1.4.2)
-  turbolinks (= 5.2.1)
+  turbo-rails
   tzinfo-data
   web-console (= 4.1.0)
   webdrivers (= 4.6.0)

@@ -1,0 +1,15 @@
+<%= turbo_stream_from comment %>
+<%= turbo_frame_tag comment do %>
+<div id="comment-<%= comment.id %>">
+[<%= comment.created_at.strftime("%I:%M %p") %>] 
+<%=comment.user.name %>
+
+
+<%= link_to "Edit",edit_comment_path(comment), style: 'float: right' %> 
+<%= link_to "Delete", comment, method: :delete,data: { confirm: 'Are you sure?', remote: true}, style: 'float: right' %>
+
+<%= comment.body %>
+<hr/>
+<br/>
+</div>
+<% end %>
