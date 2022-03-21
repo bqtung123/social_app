@@ -10,7 +10,7 @@
     <%= comment.body %>
 
     <% if @current_user == comment.user %>
-     <%= link_to "Edit",edit_comment_path(comment) %> 
+      <%= link_to "Edit",edit_comment_path(comment) %> 
     <% end %>
 
     <% if @current_user == comment.user || @current_user == comment.micropost.user%>

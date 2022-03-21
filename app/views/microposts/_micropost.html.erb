@@ -19,9 +19,9 @@
 
 
 <%= turbo_stream_from micropost, :comments %>
-  <%= tag.div id: "#{dom_id(micropost)}_comments" do %>
-    <%= render micropost.comments.where(parent_id: nil)%>
-  <% end %>
+<%= tag.div id: "#{dom_id(micropost)}_comments" do %>
+  <%= render micropost.comments.where(parent_id: nil)%>
+<% end %>
 
 </br>
 <%= turbo_frame_tag "new_comment", src: new_micropost_comment_path(micropost),target: "_top" %>
