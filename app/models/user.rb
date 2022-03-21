@@ -2,7 +2,7 @@ class User < ApplicationRecord
   rolify
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
-  
+
   acts_as_voter
   has_many :providers, dependent: :destroy
   has_many :microposts, dependent: :destroy
@@ -14,7 +14,6 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships
 
-  
   # attr_accessor :remember_token, :activation_token, :reset_token
 
   # before_save :downcase
@@ -27,11 +26,11 @@ class User < ApplicationRecord
   # has_secure_password
   # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-
   def assign_default_role
     self.add_role(:user) if self.roles.blank?
   end
   # edit in there
+
   def self.from_omniauth auth
     user = User.where(email: auth.info.email).first
     expires_at = auth.credentials.expires_at

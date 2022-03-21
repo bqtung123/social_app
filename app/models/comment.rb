@@ -6,14 +6,14 @@ class Comment < ApplicationRecord
   belongs_to :micropost
   belongs_to :parent, class_name: "Comment", optional: true
   has_many :comments, foreign_key: "parent_id", dependent: :destroy
-  
+
   validates :body, presence: true, allow_blank: false
 
   after_create_commit do
     if !parent.nil?
-        broadcast_append_to [micropost,:comments], target: "#{dom_id(micropost,parent.id)}_comments"
+      broadcast_append_to [micropost, :comments], target: "#{dom_id(micropost, parent.id)}_comments"
     else
-        broadcast_append_to [micropost,:comments], target: "#{dom_id(micropost)}_comments"
+      broadcast_append_to [micropost, :comments], target: "#{dom_id(micropost)}_comments"
     end
   end
 

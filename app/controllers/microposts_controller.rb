@@ -28,7 +28,7 @@ class MicropostsController < ApplicationController
   end
 
   def set_micropost
-      @micropost = Micropost.find_by(id: params[:id])
+    @micropost = Micropost.find_by(id: params[:id])
   end
 
   def micropost_params

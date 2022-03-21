@@ -3,7 +3,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize user
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -32,8 +32,9 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
     can :create, User
-    
-    return unless user.present?
+
+    return if user.blank?
+
     # micropost
     can :vote, Micropost
     can [:create, :destroy], Micropost, user: user
@@ -41,14 +42,14 @@ class Ability
     WHERE  follower_id = ?) OR user_id = ?", user.id, user.id]
     # user
     can :read, User
-    can [:update,:following, :followers], User, id: user.id
-    #comment
-    can [:vote,:read,:create], Comment
-    can [:update,:destroy], Comment, user: user
+    can [:update, :following, :followers], User, id: user.id
+    # comment
+    can [:vote, :read, :create], Comment
+    can [:update, :destroy], Comment, user: user
     can :destroy, Comment, micropost: { user: user}
-    
-    return unless user.has_role? :admin
-    can :manage, User
 
+    return unless user.has_role? :admin
+
+    can :manage, User
   end
 end
