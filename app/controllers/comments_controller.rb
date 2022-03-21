@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
   before_action :set_micropost, only: [:create, :new]
-  before_action :set_comment, only: [:vote]
   before_action :set_current_user
   before_action :authenticate_user!
   load_and_authorize_resource
@@ -23,7 +22,7 @@ class CommentsController < ApplicationController
         format.json { render :show, status: :created, location: @comment }
       else
         # on multiple browser
-        format.turbo_stream {render turbo_stream: turbo_stream.replace(dom_id_for_records(@micropost, @comment), partial: "comments/form", locals: {micropost: @micropost, comment: @comment})}
+        #format.turbo_stream {render turbo_stream: turbo_stream.replace(dom_id_for_records(@micropost, @comment), partial: "comments/form", locals: {micropost: @micropost, comment: @comment})}
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
@@ -60,10 +59,6 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :parent_id)
-  end
-
-  def set_comment
-    @comment = Comment.find_by(id: params[:id])
   end
 
   def set_micropost
