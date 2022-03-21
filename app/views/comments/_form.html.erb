@@ -13,8 +13,13 @@
       </div>
       </div>
     <% end %>
-    
 
-    <%= f.text_field :body %>
-    <%= f.submit "Comment" %>
+    <% if !@parent.nil?%>
+     <input type="hidden" name="comment[parent_id]" value="<%= @parent.id %>">
+    <% end %>
+
+    <%= link_to gravatar_for(current_user, size: 25), current_user%>
+    <%= f.text_field :body,style: 'width: 82%; margin-top: 5px; border-radius: 10px' %>
+    <%= f.submit "Comment" , class: "btn btn-default btn-sm", style: 'width: 10%' %>
+
 <% end %> 

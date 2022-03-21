@@ -2,7 +2,8 @@ class User < ApplicationRecord
   rolify
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
-         
+  
+  acts_as_voter
   has_many :providers, dependent: :destroy
   has_many :microposts, dependent: :destroy
   has_many :comments, dependent: :destroy

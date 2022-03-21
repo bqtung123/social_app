@@ -34,13 +34,19 @@ class Ability
     can :create, User
     
     return unless user.present?
+    # micropost
+    can :vote, Micropost
     can [:create, :destroy], Micropost, user: user
     can :home, Micropost, ["user_id IN (SELECT followed_id FROM relationships
     WHERE  follower_id = ?) OR user_id = ?", user.id, user.id]
-
+    # user
     can :read, User
     can [:update,:following, :followers], User, id: user.id
-
+    #comment
+    can [:vote,:read,:create], Comment
+    can [:update,:destroy], Comment, user: user
+    can :destroy, Comment, micropost: { user: user}
+    
     return unless user.has_role? :admin
     can :manage, User
 

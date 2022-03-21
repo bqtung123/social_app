@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
+  before_action :set_current_user
 
   def index
     @users = User.accessible_by(current_ability).paginate(page: params[:page])
@@ -57,4 +58,8 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+
+  def set_current_user
+    @current_user = current_user
+end
 end

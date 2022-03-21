@@ -35,6 +35,7 @@ gem 'rolify'
 gem 'devise'
 gem 'jquery-rails'
 gem 'turbo-rails'
+gem 'acts_as_votable'
 group :development, :test do
   gem 'sqlite3', '1.4.2'
   gem 'byebug',  '11.1.3', platforms: [:mri, :mingw, :x64_mingw]

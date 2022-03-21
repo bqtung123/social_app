@@ -1,9 +1,13 @@
 class CommentsController < ApplicationController
     before_action :set_micropost, only: [:create,:new]
-    before_action :set_comment, only: [:edit,:destroy,:update]
+    before_action :set_comment, only: [:vote]
+    before_action :set_current_user
+    before_action :authenticate_user!
+    load_and_authorize_resource
 
     def new
         @comment = Comment.new
+        @parent = Comment.find_by(id: params[:parent_id]) 
     end
 
     def edit
@@ -14,6 +18,7 @@ class CommentsController < ApplicationController
         @comment.user = current_user
         respond_to do |format|
             if @comment.save
+              format.turbo_stream {}
               format.html {redirect_to root_url}
               format.json { render :show, status: :created, location: @comment }
             else
@@ -41,15 +46,32 @@ class CommentsController < ApplicationController
         @comment.destroy
     end
 
+    def vote
+      if current_user.liked? @comment
+          @comment.unliked_by current_user
+      else
+          @comment.liked_by current_user
+      end
+
+      respond_to do |format|
+        format.html {redirect_to root_url}
+      end
+
+    end
+
     def comment_params
-        params.require(:comment).permit(:body)
+        params.require(:comment).permit(:body,:parent_id)
+    end
+
+    def set_comment
+      @comment = Comment.find_by(id: params[:id])
     end
 
     def set_micropost
         @micropost = Micropost.find(params[:micropost_id])
     end
 
-    def set_comment
-        @comment = Comment.find(params[:id])
+    def set_current_user
+        @current_user = current_user
     end
 end
