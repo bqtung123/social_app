@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
-  before_action :set_micropost, only: [:create, :new]
   before_action :set_current_user
   before_action :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource :micropost
+  load_and_authorize_resource :comment, through: :micropost
 
   def new
     @comment = Comment.new
@@ -59,10 +59,6 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :parent_id)
-  end
-
-  def set_micropost
-    @micropost = Micropost.find(params[:micropost_id])
   end
 
   def set_current_user

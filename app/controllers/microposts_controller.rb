@@ -1,7 +1,6 @@
 class MicropostsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
-  before_action :set_micropost, only: [:vote]
 
   def create
     if @micropost.save
@@ -25,10 +24,6 @@ class MicropostsController < ApplicationController
     else
       @micropost.liked_by current_user
     end
-  end
-
-  def set_micropost
-    @micropost = Micropost.find_by(id: params[:id])
   end
 
   def micropost_params

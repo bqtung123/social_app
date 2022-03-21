@@ -36,7 +36,7 @@ class Ability
     return if user.blank?
 
     # micropost
-    can :vote, Micropost
+    can [:vote,:read], Micropost
     can [:create, :destroy], Micropost, user: user
     can :home, Micropost, ["user_id IN (SELECT followed_id FROM relationships
     WHERE  follower_id = ?) OR user_id = ?", user.id, user.id]
