@@ -1,4 +1,3 @@
-
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
@@ -13,19 +12,16 @@
    
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <% if current_user?(micropost.user) %>
-    <%= link_to "delete", micropost, method: :delete,
-                                     data: { confirm: "You sure?" } %>
+      <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
     <% end %>
   </span>
 </li>
 
 
 <%= turbo_stream_from micropost, :comments %>
-<%= tag.div id: "#{dom_id(micropost)}_comments" do %>
-  <%= render micropost.comments.where(parent_id: nil)%>
-<% end %>
-
+  <%= tag.div id: "#{dom_id(micropost)}_comments" do %>
+    <%= render micropost.comments.where(parent_id: nil)%>
+  <% end %>
 
 </br>
 <%= turbo_frame_tag "new_comment", src: new_micropost_comment_path(micropost),target: "_top" %>
-

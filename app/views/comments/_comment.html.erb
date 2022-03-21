@@ -1,49 +1,42 @@
 <%= turbo_stream_from comment %>
 <%= turbo_frame_tag comment do %>
-<div id="comment-<%= comment.id %>" class="comment">
+  <div id="comment-<%= comment.id %>" class="comment">
 
-<%= link_to gravatar_for(comment.user, size: 20), comment.user %>
-<span class="user"><%= link_to comment.user.name, comment.user %></span>
-<br/>
+    <%= link_to gravatar_for(comment.user, size: 20), comment.user %>
+    <span class="user"><%= link_to comment.user.name, comment.user %></span>
 
-<%= comment.body %>
+    <br/>
 
-<% if @current_user == comment.user %>
-<%= link_to "Edit",edit_comment_path(comment) %> 
-<% end %>
+    <%= comment.body %>
 
-<% if @current_user == comment.user || @current_user == comment.micropost.user%>
-<%= link_to "Delete", comment, method: :delete,data: { confirm: 'Are you sure?', remote: true}, style: 'float: right' %>
-<% end %>
+    <% if @current_user == comment.user %>
+     <%= link_to "Edit",edit_comment_path(comment) %> 
+    <% end %>
 
-
-<% if @current_user %>
-<% if !current_user.liked? comment%>
-<%= link_to "like", likes_comment_path(comment), method: :put%>
-<% else %>
-<%= link_to "unlike", likes_comment_path(comment), method: :put%>
-<% end %>
-<% end %>
+    <% if @current_user == comment.user || @current_user == comment.micropost.user%>
+      <%= link_to "Delete", comment, method: :delete,data: { confirm: 'Are you sure?', remote: true}, style: 'float: right' %>
+    <% end %>
 
 
-</div>
+    <% if @current_user %>
+      <% if !current_user.liked? comment%>
+        <%= link_to "like", likes_comment_path(comment), method: :put%>
+      <% else %>
+        <%= link_to "unlike", likes_comment_path(comment), method: :put%>
+      <% end %>
+    <% end %>
+  </div>
 
-<%= turbo_frame_tag "new_comment" do %>
-<span class="timestamp">
-
-<%= link_to "reply", new_micropost_comment_path(comment.micropost,parent_id: comment.id) %>
+  <%= turbo_frame_tag "new_comment" do %>
+    <span class="timestamp">
+    <%= link_to "reply", new_micropost_comment_path(comment.micropost,parent_id: comment.id) %>
     <%= time_ago_in_words(comment.created_at) %> ago.
-</span>
-<% end %>
+    </span>
+  <% end %>
 
-
-
-
-
-<div class="sub_comment">
-<%= tag.div id: "#{dom_id(comment.micropost, comment.id)}_comments" do %>
-        <%= render comment.comments if comment.comments.any? %>
-<% end %>
-</div>
-
+  <div class="sub_comment">
+    <%= tag.div id: "#{dom_id(comment.micropost, comment.id)}_comments" do %>
+      <%= render comment.comments if comment.comments.any? %>
+    <% end %>
+  </div>
 <% end %>
