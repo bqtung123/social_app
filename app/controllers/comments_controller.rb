@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+  include ActionView::RecordIdentifier
+  include CommentsHelper
+
   before_action :set_current_user
   before_action :authenticate_user!
   load_and_authorize_resource :micropost
