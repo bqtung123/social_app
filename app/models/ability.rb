@@ -33,7 +33,7 @@ class Ability
 
     can :create, User
 
-    return if user.blank?
+    return unless user.present?
 
     # micropost
     can [:vote, :read], Micropost
@@ -45,7 +45,8 @@ class Ability
     can [:update, :following, :followers], User, id: user.id
     # comment
     can [:vote, :read, :create], Comment
-    can [:update, :destroy], Comment, user: user
+    can :update, Comment, user: user
+    can :destroy, Comment, user: user
     can :destroy, Comment, micropost: { user: user}
 
     return unless user.has_role? :admin

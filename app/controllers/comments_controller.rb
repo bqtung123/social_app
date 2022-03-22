@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   before_action :set_current_user
   before_action :authenticate_user!
   load_and_authorize_resource :micropost
-  load_and_authorize_resource :comment, through: :micropost
+  load_and_authorize_resource :comment
 
   def new
     @comment = Comment.new
