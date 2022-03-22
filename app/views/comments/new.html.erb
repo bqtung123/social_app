@@ -1,0 +1,4 @@
+
+<%= turbo_frame_tag "new_comment", target: "_top" do %>
+  <%= render 'form', micropost: @micropost,comment: @comment %>
+<% end %>

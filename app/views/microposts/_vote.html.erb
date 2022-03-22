@@ -1,0 +1,5 @@
+<% if current_user.liked? micropost %>
+  <%= render 'microposts/unlike',micropost: micropost%>
+<% else %>
+  <%= render 'microposts/like', micropost: micropost%>
+<% end %>
