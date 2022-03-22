@@ -15,7 +15,7 @@
     </div>
   <% end %>
 
-  <% if !@parent.nil?%>
+  <% if @parent.present? %>
     <input type="hidden" name="comment[parent_id]" value="<%= @parent.id %>">
   <% end %>
 

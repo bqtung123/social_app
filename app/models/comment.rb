@@ -10,7 +10,7 @@ class Comment < ApplicationRecord
   validates :body, presence: true, allow_blank: false
 
   after_create_commit do
-    if !parent.nil?
+    if parent.present?
       broadcast_append_to [micropost, :comments], target: "#{dom_id(micropost, parent.id)}_comments"
     else
       broadcast_append_to [micropost, :comments], target: "#{dom_id(micropost)}_comments"

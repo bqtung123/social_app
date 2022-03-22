@@ -17,7 +17,6 @@
       <%= link_to "Delete", comment, method: :delete,data: { confirm: 'Are you sure?', remote: true}, style: 'float: right' %>
     <% end %>
 
-
     <% if @current_user %>
       <% if !current_user.liked? comment%>
         <%= link_to "like", likes_comment_path(comment), method: :put%>

@@ -17,7 +17,6 @@
   </span>
 </li>
 
-
 <%= turbo_stream_from micropost, :comments %>
 <%= tag.div id: "#{dom_id(micropost)}_comments" do %>
   <%= render micropost.comments.where(parent_id: nil)%>
