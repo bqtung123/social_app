@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   resources :microposts do
     resources :comments
     member do
-        put "likes" => "microposts#vote"
+      put "likes" => "microposts#vote"
     end
   end
   resources :relationships, only: [:create,:destroy]

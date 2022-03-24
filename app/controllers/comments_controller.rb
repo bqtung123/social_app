@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
         format.json { render :show, status: :created, location: @comment }
       else
         # on multiple browser
-        #format.turbo_stream {render turbo_stream: turbo_stream.replace(dom_id_for_records(@micropost, @comment), partial: "comments/form", locals: {micropost: @micropost, comment: @comment})}
+        format.turbo_stream {render turbo_stream: turbo_stream.replace(dom_id_for_records(@micropost, @comment), partial: "comments/form", locals: {micropost: @micropost, comment: @comment})}
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
