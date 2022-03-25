@@ -80,6 +80,8 @@ GEM
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.4)
+    by_star (4.0.0)
+      activesupport (>= 3.2.0)
     byebug (11.1.3)
     cancancan (3.3.0)
     capybara (3.35.3)
@@ -497,6 +499,7 @@ DEPENDENCIES
   bootsnap (= 1.7.2)
   bootstrap-sass (~> 3.3, >= 3.3.6)
   bootstrap-will_paginate (~> 1.0)
+  by_star
   byebug (= 11.1.3)
   cancancan
   capybara (= 3.35.3)
@@ -524,6 +527,7 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   rubocop-rails
+  rubyzip
   sass-rails (= 6.0.0)
   selenium-webdriver (= 3.142.7)
   spring (= 2.1.1)

@@ -3,7 +3,20 @@ class UsersController < ApplicationController
   before_action :set_current_user
 
   def index
-    @users = User.accessible_by(current_ability).paginate(page: params[:page])
+    @users = User.all.paginate(page: params[:page])
+    @microposts = current_user.microposts.between_times(Time.zone.now - 1.month, Time.zone.now)
+    @following_users = current_user.active_relationships.between_times(Time.zone.now - 1.month, Time.zone.now)
+    @followed_users = current_user.passive_relationships.between_times(Time.zone.now - 1.month, Time.zone.now)
+
+    micropost_csv = ExportCsvService.new(@microposts, Micropost::CSV_ATTRIBUTES, "microposts.csv")
+    following_csv = ExportCsvService.new(@following_users, Relationship::CSV_ATTRIBUTES, "following_users.csv", :followed)
+    followed_csv = ExportCsvService.new(@followed_users, Relationship::CSV_ATTRIBUTES, "follower_users.csv", :follower)
+    respond_to do |format|
+      format.html
+      format.zip do
+        send_data ZipService.zip(micropost_csv, following_csv, followed_csv), filename: "activity_log.zip"
+      end
+    end
   end
 
   def new
