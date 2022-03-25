@@ -1,4 +1,5 @@
 class Micropost < ApplicationRecord
+  CSV_ATTRIBUTES = %w(content created_at).freeze
   belongs_to :user
   acts_as_votable
   default_scope -> { order(created_at: :desc) }
