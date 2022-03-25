@@ -8,21 +8,13 @@ class UsersController < ApplicationController
     @following_users = current_user.active_relationships.between_times(Time.zone.now - 1.month, Time.zone.now)
     @followed_users = current_user.passive_relationships.between_times(Time.zone.now - 1.month, Time.zone.now)
 
+    micropost_csv = ExportCsvService.new(@microposts, Micropost::CSV_ATTRIBUTES, "microposts.csv")
+    following_csv = ExportCsvService.new(@following_users, Relationship::CSV_ATTRIBUTES, "following_users.csv", :followed)
+    followed_csv = ExportCsvService.new(@followed_users, Relationship::CSV_ATTRIBUTES, "follower_users.csv", :follower)
     respond_to do |format|
       format.html
       format.zip do
-        compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-          zos.put_next_entry "microposts.csv"
-          zos.print @microposts.to_csv
-
-          zos.put_next_entry "following_users.csv"
-          zos.print @following_users.to_csv("following")
-
-          zos.put_next_entry "follower_users.csv"
-          zos.print @followed_users.to_csv("followed")
-        end
-        compressed_filestream.rewind
-        send_data compressed_filestream.read, filename: "activity_log.zip"
+        send_data ZipService.zip(micropost_csv, following_csv, followed_csv), filename: "activity_log.zip"
       end
     end
   end
