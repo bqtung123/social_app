@@ -1,3 +1,4 @@
+
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
@@ -22,5 +23,5 @@
   <%= render micropost.comments.where(parent_id: nil)%>
 <% end %>
 
-</br>
+<br/>
 <%= turbo_frame_tag "new_comment", src: new_micropost_comment_path(micropost),target: "_top" %>

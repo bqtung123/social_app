@@ -38,6 +38,9 @@ gem 'turbo-rails'
 gem 'acts_as_votable'
 gem 'rubyzip', require: 'zip'
 gem 'by_star'
+gem 'pry-rails', :group => :development
+gem 'prettier'
+
 group :development, :test do
   gem 'sqlite3', '1.4.2'
   gem 'byebug',  '11.1.3', platforms: [:mri, :mingw, :x64_mingw]
@@ -64,3 +67,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Use Redis for Action Cable
 gem 'redis', '~> 4.0'
+
+gem "noticed", "~> 1.5"
