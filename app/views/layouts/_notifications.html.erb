@@ -1,0 +1,22 @@
+<% if current_user %>
+    <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+          <span id='count-box' class="badge rounded-pill bg-primary">
+            <i class="bi bi-suit-heart-fill"> <span id='count'> <%= @unread.count >= 9 ? "9+": @unread.count %> </span></i><b class="caret"></b>
+          </span>
+        </a>
+        <ul id="notifications" class="dropdown-menu">
+          <% @unread.each do |notification|%>
+            <%= render "layouts/notification", notification: notification%> 
+          <% end %>
+          <% if @read.count > 0 && @unread.count > 0 %>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+          <% end %>
+           <% @read.each do |notification|%>
+             <%= render "layouts/notification", notification: notification%>
+           <% end %>
+        </ul>
+    </li>
+<% end %>

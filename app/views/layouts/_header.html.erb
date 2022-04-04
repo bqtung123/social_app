@@ -19,11 +19,17 @@
                   <%= link_to "Log out", logout_path, method: "delete" %>
                 </li>
               </ul>
+              </li>
+            <li>
+              <ul class="nav navbar-nav navbar-right">
+                <%= render 'layouts/notifications' %>
+              </ul>
             </li>
           <% else %>
             <li><%= link_to "Log in", login_path %></li>
           <% end %>
         </ul>
+      
       </nav>
    </div>
 </header>

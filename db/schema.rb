@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_20_141739) do
+ActiveRecord::Schema.define(version: 2022_04_01_040540) do
 
   create_table "comments", charset: "utf8", force: :cascade do |t|
     t.text "body"
@@ -38,6 +38,19 @@ ActiveRecord::Schema.define(version: 2022_03_20_141739) do
     t.string "picture"
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "notifications", charset: "utf8", force: :cascade do |t|
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.string "type", null: false
+    t.text "params", size: :long, collation: "utf8mb4_bin"
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["read_at"], name: "index_notifications_on_read_at"
+    t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
+    t.check_constraint "json_valid(`params`)", name: "params"
   end
 
   create_table "providers", charset: "utf8", force: :cascade do |t|
