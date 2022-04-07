@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # post "login" => "sessions#create"
   # delete "logout" => "sessions#destroy"
   resources :users do
-    member { get :following, :followers }
+    member { get :following, :followers, :chat }
   end
 
   # resources :account_activations, only: [:edit]
@@ -37,6 +37,11 @@ Rails.application.routes.draw do
     resources :comments
     member { put 'likes' => 'microposts#vote' }
   end
+
+  resources :rooms do
+    resources :messages
+  end
+
   resources :relationships, only: %i[create destroy]
 
   get '/auth/:provider/callback', to: 'sessions#redirect_callback'

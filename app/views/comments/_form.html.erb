@@ -1,5 +1,5 @@
 <% model = [local_assigns[:micropost],comment].compact %>
-<%= form_with model: model , id: dom_id_for_records(*model) do |f| %>
+<%= form_with model: model , id: dom_id_for_records(*model), data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } do |f| %>
 
   <% if comment.errors.any? %>
     <div class="alert alert-danger">
@@ -20,7 +20,7 @@
   <% end %>
 
   <%= link_to gravatar_for(current_user, size: 25), current_user%>
-  <%= f.text_field :body,style: 'width: 82%; margin-top: 5px; border-radius: 10px' %>
+  <%= f.text_field :body,class: "text-field" %>
   <%= f.submit "Comment" , class: "btn btn-default btn-sm", style: 'width: 10%' %>
 
 <% end %>

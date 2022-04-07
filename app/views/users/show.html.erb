@@ -21,4 +21,33 @@
       <%= will_paginate @microposts %>
     <% end %>
   </div>
+   <% if @single_room %>
+  <div class="chat-box open" id="chat-bubble">
+    <div class="header-chat">
+      <%= link_to gravatar_for(@user, size: 30), @user %>
+        <span  style="color:#e4e6eb;" onclick="openChatBubble()"> <%= @user&.name || @single_room.name %> </span>
+    </div>
+    <div class="msg-content" id="msg-content">
+        <%= turbo_stream_from @single_room %>
+        <div id="messages">
+          <%= render @messages %>
+        </div>
+        
+    </div>   
+    <%= render partial: 'messages/new_message_form' %>
+  </div>
+ <% end %>
 </div>
+
+<script>
+  function openChatBubble() {
+    var element = document.getElementById("chat-bubble");
+    element.classList.toggle("open")
+  };
+  window.setInterval(function() {
+    var elem = document.getElementById('msg-content');
+    elem.scrollTop = elem.scrollHeight;
+  }, 500);
+</script>
+
+

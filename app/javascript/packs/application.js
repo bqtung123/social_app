@@ -8,7 +8,7 @@ import "@hotwired/turbo-rails";
 import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
-
+import "controllers";
 import $ from "jquery";
 global.$ = jQuery;
 import "bootstrap";

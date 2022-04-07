@@ -3,7 +3,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize user
+  def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -36,19 +36,30 @@ class Ability
     return unless user.present?
 
     # micropost
-    can [:vote, :read], Micropost
-    can [:create, :destroy], Micropost, user: user
-    can :home, Micropost, ["user_id IN (SELECT followed_id FROM relationships
-    WHERE  follower_id = ?) OR user_id = ?", user.id, user.id]
+    can %i[vote read], Micropost
+    can %i[create destroy], Micropost, user: user
+    can :home,
+        Micropost,
+        [
+          'user_id IN (SELECT followed_id FROM relationships
+    WHERE  follower_id = ?) OR user_id = ?',
+          user.id,
+          user.id
+        ]
+
     # user
-    can :read, User
-    can [:update, :following, :followers], User, id: user.id
+    can %i[read chat], User
+    can %i[update following followers], User, id: user.id
+
     # comment
-    can [:vote, :read, :create], Comment
+    can %i[vote read create], Comment
     can :update, Comment, user: user
     can :destroy, Comment, user: user
-    can :destroy, Comment, micropost: { user: user}
+    can :destroy, Comment, micropost: { user: user }
 
+    # message
+    can %i[create read], Message
+    can :read, Room
     return unless user.has_role? :admin
 
     can :manage, User

@@ -1,0 +1,10 @@
+
+<%= form_with(model: [@single_room ,Message.new], remote: true, class: "d-flex",data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" },html: { multipart: true } ) do |f| %>
+  <%= f.text_field :content, class: "text-field" %>
+  <%= button_tag type: 'submit',class: 'submit-button', style: 'width: 15%' do %> 
+    <i class="bi bi-send-fill"></i>
+  <% end %>
+    <span class="picture">
+    <%= f.file_field :picture %>
+  </span>
+<% end %>
