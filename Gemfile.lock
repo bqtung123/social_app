@@ -472,6 +472,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
+    stimulus-rails (1.0.4)
+      railties (>= 6.0.0)
     thor (1.1.0)
     tilt (2.0.10)
     turbo-rails (1.0.1)
@@ -563,6 +565,7 @@ DEPENDENCIES
   spring (= 2.1.1)
   sprockets (~> 3.5, >= 3.5.2)
   sqlite3 (= 1.4.2)
+  stimulus-rails (~> 1.0)
   turbo-rails
   tzinfo-data
   web-console (= 4.1.0)

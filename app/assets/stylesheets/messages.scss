@@ -1,0 +1,48 @@
+// Place all the styles related to the Messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.chat-box {
+  position: fixed;
+  bottom: 20px;
+  right: 100px;
+  width: 25%;
+  font-family: inherit;
+  font-weight: bold;
+}
+.header-chat {
+  background-color: #2f3236;
+  height: 35px;
+  font-size: medium;
+}
+
+.msg-content {
+  background-color: #1c1e21;
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.message-box {
+  width: fit-content;
+  max-width: 40%;
+  padding: 5px;
+  border-radius: 10px;
+  margin: 5px;
+  color: #e4e6eb;
+  background-color: #555555;
+  padding: 10px;
+}
+.submit-button {
+  border: 0ch;
+  background-color: white;
+}
+
+#chat-bubble {
+  height: 35px;
+  overflow: hidden;
+  min-width: 300px;
+}
+
+#chat-bubble.open {
+  display: block;
+  min-height: 510px;
+}

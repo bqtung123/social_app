@@ -17,4 +17,11 @@
       Activity log
     </strong>
   </a>
+  <% if current_user != @user%>
+  <a href="<%= chat_user_path(@user) %>">
+    <strong class="stat">
+      Send message
+    </strong>
+  <% end %>
+  </a>
 </div>

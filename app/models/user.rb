@@ -26,6 +26,7 @@ class User < ApplicationRecord
            dependent: :destroy
   has_many :followers, through: :passive_relationships
   has_many :notifications, as: :recipient
+  has_many :messages, dependent: :destroy
 
   after_create :assign_default_role
 
