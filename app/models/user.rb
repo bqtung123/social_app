@@ -6,7 +6,6 @@ class User < ApplicationRecord
          :recoverable,
          :rememberable,
          :validatable,
-         :confirmable,
          :omniauthable
 
   acts_as_voter
