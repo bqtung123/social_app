@@ -12,7 +12,7 @@ class ReactNotification < Noticed::Base
              stream: :custom_stream,
              format: :action_cable_data
 
-  deliver_by :email, mailer: 'UserMailer'
+  deliver_by :email, mailer: "UserMailer"
 
   def custom_stream
     @micropost = Micropost.find(params[:micropost][:id])

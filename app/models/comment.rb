@@ -4,11 +4,11 @@ class Comment < ApplicationRecord
   acts_as_votable
   belongs_to :user
   belongs_to :micropost
-  belongs_to :parent, class_name: 'Comment', optional: true
-  has_many :comments, foreign_key: 'parent_id', dependent: :destroy
+  belongs_to :parent, class_name: "Comment", optional: true
+  has_many :comments, foreign_key: "parent_id", dependent: :destroy
 
   validates :body, presence: true, allow_blank: false
-  has_noticed_notifications model_name: 'Notification'
+  has_noticed_notifications model_name: "Notification"
 
   after_create_commit :broadcast_and_notify_recipient
 

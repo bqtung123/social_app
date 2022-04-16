@@ -14,9 +14,9 @@ Style/MultilineBlockChain:
 
 Style/BlockDelimiters:
   Description: >-
-                Avoid using {...} for multi-line blocks (multiline chaining is
-                always ugly).
-                Prefer {...} over do...end for single-line blocks.
+    Avoid using {...} for multi-line blocks (multiline chaining is
+    always ugly).
+    Prefer {...} over do...end for single-line blocks.
   Enabled: false
 
 Style/SymbolArray:
@@ -88,8 +88,8 @@ Metrics/AbcSize:
 
 Layout/ArrayAlignment:
   Description: >-
-                 Align the elements of an array literal if they span more than
-                 one line.
+    Align the elements of an array literal if they span more than
+    one line.
   Enabled: false
 
 Style/RedundantPercentQ:
@@ -110,8 +110,8 @@ Style/Encoding:
 
 Style/NestedParenthesizedCalls:
   Description: >-
-                 Parenthesize method calls which are nested inside the
-                 argument list of another parenthesized method call.
+    Parenthesize method calls which are nested inside the
+    argument list of another parenthesized method call.
   Enabled: false
 
 Style/ParallelAssignment:
@@ -120,9 +120,9 @@ Style/ParallelAssignment:
 
 Style/ConditionalAssignment:
   Description: >-
-                 Use the return value of `if` and `case` statements for
-                 assignment to a variable and variable comparison instead
-                 of assigning that variable inside of each branch.
+    Use the return value of `if` and `case` statements for
+    assignment to a variable and variable comparison instead
+    of assigning that variable inside of each branch.
   Enabled: false
   SingleLineConditionsOnly: false
 
@@ -131,8 +131,8 @@ Style/Lambda:
   Enabled: false
 
 Style/StabbyLambdaParentheses:
-  Description: 'Check for the usage of parentheses around stabby lambda arguments.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#stabby-lambda-with-args'
+  Description: "Check for the usage of parentheses around stabby lambda arguments."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#stabby-lambda-with-args"
   Enabled: false
 
 Layout/ElseAlignment:
@@ -143,14 +143,14 @@ Style/MutableConstant:
 
 Style/RegexpLiteral:
   Description: >-
-                 Use %r for regular expressions matching more than
-                 `MaxSlashes` '/' characters.
-                 Use %r only for regular expressions matching more than
-                 `MaxSlashes` '/' character.
+    Use %r for regular expressions matching more than
+    `MaxSlashes` '/' characters.
+    Use %r only for regular expressions matching more than
+    `MaxSlashes` '/' character.
   Enabled: false
 
 Style/FormatString:
-  Description: 'Favor format over String#%'
+  Description: "Favor format over String#%"
   Enabled: false
 
 #################### Lint ################################
@@ -166,7 +166,7 @@ Lint/AmbiguousOperator:
   Enabled: false
 
 Lint/ShadowingOuterLocalVariable:
-  Description: 'Shadowing outer local variable'
+  Description: "Shadowing outer local variable"
   Enabled: false
 
 Style/RedundantSelf:
@@ -174,11 +174,11 @@ Style/RedundantSelf:
   Enabled: false
 
 Rails/FindBy:
-  Description: 'Prefer find_by over where.first.'
+  Description: "Prefer find_by over where.first."
   Enabled: false
 
 Rails/Output:
-  Description: 'Do not write to stdout. Use Rails logger if you want to log.'
+  Description: "Do not write to stdout. Use Rails logger if you want to log."
   Enabled: false
 
 Style/BlockComments:
@@ -188,28 +188,27 @@ Style/BlockComments:
 Rails/Date:
   Enabled: false
   Description: >-
-                  Do not use to_time on Date objects, because they know
-                  nothing about the time zone in use
+    Do not use to_time on Date objects, because they know
+    nothing about the time zone in use
 
 Rails/TimeZone:
   Enabled: false
   Description: >-
-                  Do not use Time.at without zone. Use one of Time.zone.at,
-                  Time.current, Time.at.in_time_zone, Time.at.utc,
-                  Time.at.getlocal, Time.at.iso8601, Time.at.jisx0301,
-                  Time.at.rfc3339, Time.at.to_i, Time.at.to_f instead
+    Do not use Time.at without zone. Use one of Time.zone.at,
+    Time.current, Time.at.in_time_zone, Time.at.utc,
+    Time.at.getlocal, Time.at.iso8601, Time.at.jisx0301,
+    Time.at.rfc3339, Time.at.to_i, Time.at.to_f instead
 
 Layout/EndAlignment:
   Description: "Align ends correctly."
   Enabled: false
 
-
 Security/Open:
-  Description: 'The use of `Kernel#open` is a serious security risk'
+  Description: "The use of `Kernel#open` is a serious security risk"
   Enabled: false
 
 Layout/MultilineOperationIndentation:
-    Enabled: false
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -236,4 +235,7 @@ Rails/SkipsModelValidations:
   Enabled: false
 
 Rails/OutputSafety:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
   Enabled: false

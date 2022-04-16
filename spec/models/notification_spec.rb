@@ -1,5 +1,8 @@
-require 'rails_helper'
-
+require "rails_helper"
 RSpec.describe Notification, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "when first created" do
+    it "should be empty" do
+      expect(subject.type).to be_nil
+    end
+  end
 end
