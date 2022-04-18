@@ -6,7 +6,7 @@ test:
   adapter: test
 
 production:
-  url: redis://redistogo:42585d6be6213137db0e87d54820619c@pearlfish.redistogo.com:10202/
+  url: redis://redistogo:af1ed6efbf97b9c40246bdca8a4bba0b@pearlfish.redistogo.com:10202/
   host: pearlfish.redistogo.com
   port: 10202
   inline: true
