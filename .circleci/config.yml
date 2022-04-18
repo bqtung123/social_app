@@ -98,4 +98,6 @@ workflows:
       - rubocop:
           requires:
             - build
-      - rspec
+      - rspec:
+          requires:
+            - build
