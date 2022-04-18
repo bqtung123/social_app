@@ -6,6 +6,8 @@ test:
   adapter: test
 
 production:
-  adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: social_app_production
+  url: redis://redistogo:af1ed6efbf97b9c40246bdca8a4bba0b@pearlfish.redistogo.com:10202/
+  host: pearlfish.redistogo.com
+  port: 10202
+  inline: true
+  timeout: 1
