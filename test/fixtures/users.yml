@@ -1,32 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-michael:
-  name: Michael Example
-  email: michael@example.org
-  password_digest: <%= User.digest('password')%>
-  admin: true
-  activated: true
-  activated_at: <%= Time.zone.now %>
-  
-archer:
-  name: Archer Example
-  email: archer@example.org
-  password_digest: <%= User.digest('password')%>
-  activated: true
-  activated_at: <%= Time.zone.now %>
-
-lana:
-  name: Lana Example
-  email: lana@example.org
-  password_digest: <%= User.digest('password')%>
-  activated: true
-  activated_at: <%= Time.zone.now %>
-
-<% 33.times do |n|%>
-user_<%= n %>:
-  name: <%= "User#{n}Example" %>
-  email: <%=  "user#{n}@example.org" %>
-  password_digest: <%= User.digest('password')%>
-  activated: true
-  activated_at: <%= Time.zone.now %>
-<% end %>
+regular:
+  name: "Bui Quang Tung"
+  email: bqtung123@gmail.com
+  encrypted_password: $2a$12$UBKnFjFGWuVNmnO4ZIpBBelBWbKRrIuqIw48uWFYtRCpZjTVygvCy
+  reset_password_token: nil
+  reset_password_sent_at: nil
+  remember_created_at: nil
+  confirmation_token: _wxxKqfentig8r1xC7is
+  confirmed_at: 2022-03-07 03:18:21
+  confirmation_sent_at: 2022-03-07 03:18:14
+  unconfirmed_email: nil
+  created_at: 2011-01-02 08:30:59
+  updated_at: 2011-01-02 08:31:23
