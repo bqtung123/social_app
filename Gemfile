@@ -43,9 +43,9 @@ gem "turbo-rails"
 
 group :development, :test do
   gem "byebug", "11.1.3", platforms: [:mri, :mingw, :x64_mingw]
+  gem "mysql2"
   gem "rspec-rails", "~> 4.0.0"
   gem "sqlite3", "1.4.2"
-  gem "mysql2"
 end
 
 group :development do
@@ -63,7 +63,7 @@ end
 
 group :production do
   gem "pg", "1.2.3"
-  gem 'rails_12factor'
+  gem "rails_12factor"
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
