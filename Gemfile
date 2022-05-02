@@ -34,13 +34,17 @@ gem "acts_as_votable"
 gem "by_star"
 gem "cancancan"
 gem "devise"
+gem "faraday"
 gem "jquery-rails"
 gem "prettier"
 gem "pry-rails", group: :development
 gem "rolify"
 gem "rubyzip", require: "zip"
+gem "slack-api"
+gem "slack-notifier"
 gem "turbo-rails"
-
+gem "whenever", require: false
+gem 'slack-ruby-client'
 group :development, :test do
   gem "byebug", "11.1.3", platforms: [:mri, :mingw, :x64_mingw]
   gem "mysql2"

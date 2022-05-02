@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable,
          :rememberable,
          :validatable,
-         :omniauthable
+         :omniauthable, :trackable
 
   acts_as_voter
   has_many :providers, dependent: :destroy
