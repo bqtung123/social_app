@@ -42,9 +42,9 @@ gem "rolify"
 gem "rubyzip", require: "zip"
 gem "slack-api"
 gem "slack-notifier"
+gem "slack-ruby-client"
 gem "turbo-rails"
 gem "whenever", require: false
-gem 'slack-ruby-client'
 group :development, :test do
   gem "byebug", "11.1.3", platforms: [:mri, :mingw, :x64_mingw]
   gem "mysql2"
