@@ -47,6 +47,6 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: "sessions#redirect_callback"
   get "/auth/callback", to: "slack#callback"
-  get "/post_message", to: "slack#post_message"
+  post "post_message", to: "slack#post_message"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

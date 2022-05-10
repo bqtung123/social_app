@@ -34,6 +34,7 @@ gem "acts_as_votable"
 gem "by_star"
 gem "cancancan"
 gem "devise"
+gem "factory_bot"
 gem "faraday"
 gem "jquery-rails"
 gem "prettier"
@@ -50,6 +51,7 @@ group :development, :test do
   gem "mysql2"
   gem "rspec-rails", "~> 4.0.0"
   gem "sqlite3", "1.4.2"
+  gem "webmock"
 end
 
 group :development do
