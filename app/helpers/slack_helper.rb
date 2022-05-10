@@ -1,6 +1,6 @@
 module SlackHelper
   def get_response code = ""
-    client = Slack::Web::Client.new
+    # client = Slack::Web::Client.new
     # response = client.oauth_v2_access(
     #   client_id: "3436754530455.3486362454816",
     #   client_secret: "2b24fde9bce6d52bce841856161e0166",
