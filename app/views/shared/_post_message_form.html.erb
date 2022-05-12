@@ -1,0 +1,6 @@
+<%= form_for(:message, url: post_message_path, html: { multipart: true }) do |f| %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Compose new message.." %>
+  </div>
+  <%= f.submit "Send message to slack", class: "btn btn-primary" %>
+<% end %>

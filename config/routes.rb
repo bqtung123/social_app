@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "slack/callback"
   root "static_pages#home"
   get "help" => "static_pages#help"
   get "about" => "static_pages#about"
@@ -45,5 +46,7 @@ Rails.application.routes.draw do
   resources :relationships, only: %i(create destroy)
 
   get "/auth/:provider/callback", to: "sessions#redirect_callback"
+  get "/auth/callback", to: "slack#callback"
+  post "post_message", to: "slack#post_message"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
